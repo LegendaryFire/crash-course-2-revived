@@ -8,8 +8,16 @@ console.
 
 ## Run it
 
-Put the two files from your console in `game-data/`, under the names the Xbox gave
-them:
+Two commands. First build the one program here that needs compiling — a small XEX
+unpacker, from `tools/xexmerge_src`, and `make` puts the result beside `revive.py`:
+
+```sh
+make
+```
+
+That needs a C and a C++ compiler (gcc and g++, or clang) and nothing else; see
+[Compiling xexmerge](#compiling-xexmerge) if you have neither. Then put the two files
+from your console in `game-data/`, under the names the Xbox gave them:
 
 ```
 game-data/92EC7B55A94EF2145A233412B18261DEA2BAE65858   the game's LIVE package, 333 MB
@@ -35,8 +43,7 @@ goes on the command line instead, where a path may be the package or any folder 
 python3 revive.py <game> <title update> [out]
 ```
 
-Needs Python 3.9 or newer and nothing else; `xexmerge`, which does the unpacking, is
-already here for x86-64 Linux (see [Other machines](#other-machines)).
+Needs Python 3.9 or newer besides the compiler `make` already used.
 
 If `game-data/` is missing one of the two files, the run stops before it starts work and
 prints which one and where it goes: the names are matched exactly, never guessed at.
@@ -102,20 +109,31 @@ Online play and marketplace content — that was the service, not the game. The 
 mod's stand-in avatar model is also left out, because a real console renders your own
 avatar.
 
-### Other machines
+### Compiling xexmerge
 
-`xexmerge` here is built for x86-64 Linux. Anywhere else:
+`xexmerge` unpacks the retail XEX and applies the Title Update's `.xexp`, checking
+Microsoft's own block hashes as it goes; it's the one part that isn't Python, so nothing
+here runs until `make` has built it. Sources are in `tools/xexmerge_src` (C and C++,
+with libmspack's LZX decompressor vendored — see its `NOTICE`).
 
-```sh
-make -C tools/xexmerge_src        # needs gcc and g++; then --xexmerge tools/xexmerge
-```
+| | |
+|---|---|
+| Linux, macOS | `make`, with gcc or clang. `make CC=clang CXX=clang++` if you prefer. |
+| Windows | in an MSYS2 / MinGW-w64 shell: `pacman -S mingw-w64-ucrt-x86_64-toolchain make`, then `make` |
+| WSL | `sudo apt install build-essential`, then `make` |
+| cross-build for Windows, from Linux | `make CROSS=x86_64-w64-mingw32-` gives `xexmerge.exe`, linked static so no runtime DLLs are needed beside it |
+
+`make clean` removes the binary and the objects. `make doritos` does both steps above in
+one go, and `make check` runs the two verifications on whatever is in `output/`.
 
 ## How this folder is put together
 
 `revive.py` merges, patches, rehashes and repacks; `xexpatch.py` is the XEX library
 behind it, `pakpatch.py` and `pakedits.py` the menu edits, `patches/offline.patch.json`
 every patch of the mod as addresses and bytes (a console build applies 9 of them, 144
-writes), and `tools/` reads 360 packages, paks and templates.
+writes), and `tools/` reads 360 packages, paks and templates. The `Makefile` builds
+`xexmerge` out of `tools/xexmerge_src` and has a `doritos` and a `check` target for the
+two things you would otherwise type by hand.
 
 It is assembled from the Xenia mod's repository by that repo's
 `console/tools/make_bundle.py`, which is also what keeps the patch list here identical

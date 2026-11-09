@@ -34,9 +34,9 @@ import tempfile
 
 import pakpatch                                               # noqa: E402
 from xexpatch import (BASE, CONSOLE_PATCHES, GAME_FILE, GAME_FOLDER, OPTIONAL,  # noqa: E402
-                      OUTPUT, PATCH_FILE, UPDATE_FILE, XENIA_ONLY, apply_patches,
-                      check_hashes, file_format, find, in_game_data, merge_update,
-                      patch_writes, repack_xex, verify_xex)
+                      OUTPUT, PATCH_FILE, UPDATE_FILE, XEXMERGE, XENIA_ONLY,
+                      apply_patches, check_hashes, check_xexmerge, file_format, find,
+                      in_game_data, merge_update, patch_writes, repack_xex, verify_xex)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -57,8 +57,8 @@ def main():
                          "(the post-boot Xbox Live gate comes back without it)")
     ap.add_argument("--unlock-all", action="store_true", help="every course unlocked, no stars")
     ap.add_argument("--race-solo", action="store_true", help="World Tour without the AI racers")
-    ap.add_argument("--xexmerge", default=os.path.join(HERE, "xexmerge"),
-                    help="the xexmerge binary (default: this folder)")
+    ap.add_argument("--xexmerge", default=XEXMERGE,
+                    help="the xexmerge binary, from `make` (default: %(default)s)")
     ap.add_argument("--no-verify", action="store_true",
                     help="skip checking the built XEX against the patched image")
     ap.add_argument("--zero-signature", action="store_true",
@@ -76,6 +76,7 @@ def main():
 
     a.game = a.game or in_game_data(GAME_FILE, "game (its Xbox Live package)")
     a.update = a.update or in_game_data(UPDATE_FILE, "Title Update")
+    check_xexmerge(a.xexmerge)
     print("Game:  ", a.game)
     print("Update:", a.update)
 

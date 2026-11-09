@@ -1,4 +1,9 @@
-# the game you own and the game this writes: neither belongs in git
+# built by make: the tool and the compiler's objects
+xexmerge
+xexmerge.exe
+*.o
+
+# the game you own, and the game this writes: neither belongs in git
 game-data/*
 !game-data/README.md
 output/*

@@ -28,12 +28,13 @@ def main():
                                               f"default.xexp (default: game-data/{X.UPDATE_FILE})")
     ap.add_argument("names", nargs="*", help="patches to expect (default: the console set)")
     ap.add_argument("--patches", default=X.PATCH_FILE, help="the patch file to expect")
-    ap.add_argument("--xexmerge", default=os.path.join(HERE, "xexmerge"),
-                    help="the xexmerge binary (default: this folder)")
+    ap.add_argument("--xexmerge", default=X.XEXMERGE,
+                    help="the xexmerge binary, from `make` (default: %(default)s)")
     a = ap.parse_args()
 
     a.game = a.game or X.in_game_data(X.GAME_FILE, "game (its Xbox Live package)")
     a.update = a.update or X.in_game_data(X.UPDATE_FILE, "Title Update")
+    X.check_xexmerge(a.xexmerge)
     names = a.names or X.CONSOLE_PATCHES
     with tempfile.TemporaryDirectory() as tmp:
         with open(a.built, "rb") as f:

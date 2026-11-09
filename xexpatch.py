@@ -56,6 +56,31 @@ GAME_FOLDER = "Doritos Crash Course 2"
 GAME_FILE = "92EC7B55A94EF2145A233412B18261DEA2BAE65858"
 UPDATE_FILE = "TU_1C424IF_000000K000000.00000000000G5"
 
+# xexmerge, the unpacker, is not shipped as a binary: `make` builds it from
+# tools/xexmerge_src into the folder beside this module, which is where this looks.
+XEXMERGE = os.path.join(HERE, "xexmerge" + (".exe" if os.name == "nt" else ""))
+
+
+def check_xexmerge(path):
+    """Stop with an instruction instead of a traceback when xexmerge cannot run.
+
+    Running it with no arguments is the test: it prints its usage and exits 2, so
+    this catches the three real cases - never built, built for another OS or CPU,
+    and something else altogether in its place - before any of the work starts.
+    """
+    build = "build it first:  make"
+    if not os.path.isfile(path):
+        raise SystemExit(f"{path} is not there.\n  {build}")
+    try:
+        ran = subprocess.run([path], capture_output=True, text=True)
+    except OSError as why:
+        raise SystemExit(f"{path} will not run here ({why.strerror}).\n"
+                         f"  {build}, which builds one for this machine")
+    if "usage" not in (ran.stdout + ran.stderr).lower():
+        raise SystemExit(f"{path} does not look like xexmerge; it said: "
+                         f"{(ran.stderr or ran.stdout).strip()[:120]}")
+    return path
+
 
 BASE = 0x82000000
 
