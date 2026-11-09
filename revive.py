@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """Build Doritos Crash Course 2 for a modded Xbox 360 (RGH/JTAG) as a freeboot folder.
 
-Give it the game and the Title Update; the patched folder appears beside them.
+With no arguments it takes the two files from `game-data/` beside this script and
+writes the result to `output/Doritos Crash Course 2/`, ready to copy to the console:
 
-`game` and `title update` are anything that holds the files: the extracted folder, a
-LIVE or LiveContent package, or default.xex / default.xexp themselves. The out folder
-is made if it does not exist.
+    game-data/92EC7B55A94EF2145A233412B18261DEA2BAE65858   the game's LIVE package
+    game-data/TU_1C424IF_000000K000000.00000000000G5       the Title Update
+
+Those two names, exactly — as an Xbox 360's hard drive and live cache name them — or
+else the paths given on the command line, where a path may be the package, a folder
+holding the files, or default.xex / default.xexp themselves. The out folder is made
+if it does not exist.
 
 The Title Update's default.xexp is merged into the game's default.xex (with
 xexmerge), the console-relevant patches from the patch file are applied to the
@@ -28,8 +33,9 @@ import shutil
 import tempfile
 
 import pakpatch                                               # noqa: E402
-from xexpatch import (BASE, CONSOLE_PATCHES, OPTIONAL, PATCH_FILE, XENIA_ONLY,  # noqa: E402
-                      apply_patches, check_hashes, file_format, find, merge_update,
+from xexpatch import (BASE, CONSOLE_PATCHES, GAME_FILE, GAME_FOLDER, OPTIONAL,  # noqa: E402
+                      OUTPUT, PATCH_FILE, UPDATE_FILE, XENIA_ONLY, apply_patches,
+                      check_hashes, file_format, find, in_game_data, merge_update,
                       patch_writes, repack_xex, verify_xex)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -37,10 +43,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("game", help="the game's default.xex, or the folder/package that holds it")
-    ap.add_argument("update", help="the Title Update package that holds default.xexp")
-    ap.add_argument("out", nargs="?", default="Doritos Crash Course 2",
-                    help="the freeboot folder to write (default: ./Doritos Crash Course 2)")
+    ap.add_argument("game", nargs="?", help="the game's default.xex, or the folder/package "
+                                            f"that holds it (default: game-data/{GAME_FILE})")
+    ap.add_argument("update", nargs="?", help="the Title Update package that holds "
+                                              f"default.xexp (default: game-data/{UPDATE_FILE})")
+    ap.add_argument("out", nargs="?", default=os.path.join(OUTPUT, GAME_FOLDER),
+                    help=f"the freeboot folder to write (default: {OUTPUT}{os.sep}{GAME_FOLDER})")
     ap.add_argument("--patches", default=PATCH_FILE,
                     help="the patch file: the Xenia mod's TOML or the JSON a bundle "
                          "ships beside it (default %(default)s)")
@@ -65,6 +73,11 @@ def main():
                     help="diagnostic: merge and repack without any patch, to show "
                          "whether the console accepts the repacked XEX at all")
     a = ap.parse_args()
+
+    a.game = a.game or in_game_data(GAME_FILE, "game (its Xbox Live package)")
+    a.update = a.update or in_game_data(UPDATE_FILE, "Title Update")
+    print("Game:  ", a.game)
+    print("Update:", a.update)
 
     enabled = [] if a.no_patches else list(CONSOLE_PATCHES)
     enabled += [name for name, on in zip(OPTIONAL, (a.unlock_all, a.race_solo)) if on]
@@ -120,8 +133,8 @@ def main():
             copied += 1
         print(f"  {copied} files, plus default.xex and data.pak -> {a.out}")
 
-    print("\nDone. Copy the whole folder to the console's hard drive and start it from "
-          "Aurora; the README has the console steps.")
+    print(f"\nDone. Copy {a.out} to the console's hard drive and start it from Aurora; "
+          "the README has the console steps.")
 
 
 if __name__ == "__main__":

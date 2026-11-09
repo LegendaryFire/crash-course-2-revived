@@ -1,5 +1,9 @@
-# the game this writes, and python's droppings
-Doritos Crash Course 2/
-out/
+# the game you own and the game this writes: neither belongs in git
+game-data/*
+!game-data/README.md
+output/*
+!output/README.md
+
+# python's droppings
 __pycache__/
 *.pyc

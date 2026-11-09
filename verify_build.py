@@ -22,14 +22,18 @@ import xexpatch as X                       # noqa: E402
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("built", help="the built default.xex to check")
-    ap.add_argument("game", help="the game's default.xex, or the folder/package that holds it")
-    ap.add_argument("update", help="the Title Update package that holds default.xexp")
+    ap.add_argument("game", nargs="?", help="the game's default.xex, or the folder/package "
+                                            f"that holds it (default: game-data/{X.GAME_FILE})")
+    ap.add_argument("update", nargs="?", help="the Title Update package that holds "
+                                              f"default.xexp (default: game-data/{X.UPDATE_FILE})")
     ap.add_argument("names", nargs="*", help="patches to expect (default: the console set)")
     ap.add_argument("--patches", default=X.PATCH_FILE, help="the patch file to expect")
     ap.add_argument("--xexmerge", default=os.path.join(HERE, "xexmerge"),
                     help="the xexmerge binary (default: this folder)")
     a = ap.parse_args()
 
+    a.game = a.game or X.in_game_data(X.GAME_FILE, "game (its Xbox Live package)")
+    a.update = a.update or X.in_game_data(X.UPDATE_FILE, "Title Update")
     names = a.names or X.CONSOLE_PATCHES
     with tempfile.TemporaryDirectory() as tmp:
         with open(a.built, "rb") as f:

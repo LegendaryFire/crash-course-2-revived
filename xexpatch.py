@@ -44,6 +44,18 @@ if not os.path.isfile(PATCH_FILE):
     PATCH_FILE = os.path.join(HERE, "..", "..", "doritos-crash-course-xenia", "patches",
                               "5841124F - Doritos Crash Course 2 (offline).patch.toml")
 
+# the two folders a bundle uses: the inputs in, the patched game out
+GAME_DATA = os.path.join(HERE, "game-data")
+OUTPUT = os.path.join(HERE, "output")
+GAME_FOLDER = "Doritos Crash Course 2"
+
+# and the two inputs under their own names, which are not names anyone chooses: the
+# first is the game's Xbox Live package on the hard drive, at
+# Content\0000000000000000\5841124F\000D0000\, and the second the Title Update in the
+# live cache. Copying them off the console keeps both.
+GAME_FILE = "92EC7B55A94EF2145A233412B18261DEA2BAE65858"
+UPDATE_FILE = "TU_1C424IF_000000K000000.00000000000G5"
+
 
 BASE = 0x82000000
 
@@ -79,6 +91,24 @@ HEADER_ALIGN = 0x1000
 
 def be32(d, p):
     return struct.unpack_from(">I", d, p)[0]
+
+
+def in_game_data(name, what, folder=None):
+    """`name` in the game-data folder, matched ignoring case because Windows may.
+
+    Only this exact name, never a guess: the two input files are named by the Xbox
+    itself, so a folder that does not hold them holds something we should not
+    silently pick for someone. What it prints says which file is wanted and where.
+    """
+    folder = folder or GAME_DATA
+    run = os.path.basename(sys.argv[0]) if sys.argv else "revive.py"
+    unless = f"or name the two files on the command line: {run} <game> <update> [out]"
+    if not os.path.isdir(folder):
+        raise SystemExit(f"there is no game-data folder at {folder}\n  {unless}")
+    for entry in sorted(os.listdir(folder)):
+        if entry.lower() == name.lower():
+            return os.path.join(folder, entry)
+    raise SystemExit(f"put the {what} in {folder} as {name}\n  {unless}")
 
 
 def find(path, name, tmp=None):

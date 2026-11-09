@@ -8,21 +8,38 @@ console.
 
 ## Run it
 
-```sh
-python3 revive.py <LIVE package> <title update package>
+Put the two files from your console in `game-data/`, under the names the Xbox gave
+them:
+
+```
+game-data/92EC7B55A94EF2145A233412B18261DEA2BAE65858   the game's LIVE package, 333 MB
+game-data/TU_1C424IF_000000K000000.00000000000G5       the Title Update, 1.4 MB
 ```
 
-Two things in, both from the console's own hard drive or your backups:
+Then:
 
-| input | what it looks like |
-|---|---|
-| the game | its Xbox Live package, `000D0000\92EC7B55A94EF214…`, 333 MB |
-| the Title Update | `TU_1C424IF_000000K000000.00000000000G5`, 1.4 MB |
+```sh
+python3 revive.py
+```
 
-Either can also be a folder holding the files. The result is a
-`Doritos Crash Course 2/` folder in the current directory — 42 files, 356 MB — after a
-minute or two. Needs Python 3.9 or newer and nothing else; `xexmerge`, which does the
-unpacking, is already here for x86-64 Linux (see [Other machines](#other-machines)).
+The patched game appears in **`output/Doritos Crash Course 2/`** — 42 files, 356 MB —
+after a minute or two. Nothing is uploaded anywhere, and git commits neither folder.
+
+Those two names are what the console itself calls them, the first under
+`Hdd:\Content\0000000000000000\5841124F\000D0000\` and the second in the live cache, so
+copying them across keeps them. Something else — a renamed dump, an extracted folder —
+goes on the command line instead, where a path may be the package or any folder holding
+`default.xex` and `default.xexp`:
+
+```sh
+python3 revive.py <game> <title update> [out]
+```
+
+Needs Python 3.9 or newer and nothing else; `xexmerge`, which does the unpacking, is
+already here for x86-64 Linux (see [Other machines](#other-machines)).
+
+If `game-data/` is missing one of the two files, the run stops before it starts work and
+prints which one and where it goes: the names are matched exactly, never guessed at.
 
 ## Put it on the console
 
@@ -32,7 +49,7 @@ unpacking, is already here for x86-64 Linux (see [Other machines](#other-machine
 2. **Leave the installed game itself installed.** It is what holds the licence, and
    without it the dashboard refuses to launch. Aurora will list two Crash Course 2s —
    start yours from the file browser, not the games blade.
-3. Copy the **whole output folder** to the internal drive,
+3. Copy **`output/Doritos Crash Course 2`** to the internal drive,
    `Hdd:\Games\Doritos Crash Course 2\`, and start it from Aurora.
 
 First screen is the course list. You race as your own avatar.
@@ -63,11 +80,12 @@ lets a modded kernel load the file at all.
 | `--exe-only` | just `default.xex`, leaving `data.pak` as the game's own |
 | `--help` | the diagnostics: `--patches FILE`, `--xexmerge PATH`, `--zero-signature`, `--compression`, `--no-verify`, `--no-patches` |
 
-Two checks, if you want them:
+Two checks, if you want them (both read the inputs from `game-data/`, like the build
+does):
 
 ```sh
-./check_hashes.py "Doritos Crash Course 2/default.xex"      # would the loader take this?
-./verify_build.py "Doritos Crash Course 2/default.xex" <LIVE> <TU>   # all 144 writes, nothing else
+./check_hashes.py output/"Doritos Crash Course 2"/default.xex    # would the loader take this?
+./verify_build.py output/"Doritos Crash Course 2"/default.xex    # all 144 writes, nothing else
 ```
 
 ## If it does not start
