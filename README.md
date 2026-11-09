@@ -95,21 +95,7 @@ does):
 ./verify_build.py output/"Doritos Crash Course 2"/default.xex    # all 144 writes, nothing else
 ```
 
-## If it does not start
-
-| | |
-|---|---|
-| "The game could not start. Try downloading the game again later." | An installed Title Update that no longer matches the merged exe — delete it, keep the game. `./check_hashes.py` on your `default.xex` rules out the file itself. |
-| "This game can't be started from this location" | The kernel is not patched. Patching the exe invalidates Microsoft's signature, so this needs an RGH/JTAG kernel. |
-| Black screen after the dash | `default.xex` and `data.pak` need the other 40 files beside them. |
-
-## Not included
-
-Online play and marketplace content — that was the service, not the game. The Xenia
-mod's stand-in avatar model is also left out, because a real console renders your own
-avatar.
-
-### Compiling xexmerge
+## Compiling xexmerge
 
 `xexmerge` unpacks the retail XEX and applies the Title Update's `.xexp`, checking
 Microsoft's own block hashes as it goes; it's the one part that isn't Python, so nothing
@@ -123,8 +109,25 @@ with libmspack's LZX decompressor vendored — see its `NOTICE`).
 | WSL | `sudo apt install build-essential`, then `make` |
 | cross-build for Windows, from Linux | `make CROSS=x86_64-w64-mingw32-` gives `xexmerge.exe`, linked static so no runtime DLLs are needed beside it |
 
-`make clean` removes the binary and the objects. `make doritos` does both steps above in
-one go, and `make check` runs the two verifications on whatever is in `output/`.
+`make clean` removes the binary and the objects. `make doritos` does both steps in
+`Run it` in one go, and `make check` runs the two verifications on whatever is in
+`output/`.
+
+## If it does not start
+
+| | |
+|---|---|
+| `xexmerge is not there. — build it first: make` | You ran the script before building it. `make`, then run it again; `make doritos` does both. |
+| "The game could not start. Try downloading the game again later." | An installed Title Update that no longer matches the merged exe — delete it, keep the game. `./check_hashes.py` on your `default.xex` rules out the file itself. |
+| "This game can't be started from this location" | The kernel is not patched. Patching the exe invalidates Microsoft's signature, so this needs an RGH/JTAG kernel. |
+| Black screen after the dash | `default.xex` and `data.pak` need the other 40 files beside them. |
+
+## Not included
+
+Online play and marketplace content — that was the service, not the game. The Xenia
+mod's stand-in avatar model is also left out, because a real console renders your own
+avatar.
+
 
 ## How this folder is put together
 
