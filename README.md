@@ -50,14 +50,24 @@ prints which one and where it goes: the names are matched exactly, never guessed
 
 ## Put it on the console
 
-1. **Delete the installed Title Update**, under
-   `Hdd:\Content\0000000000000000\5841124F\`. An installed `.xexp` on top of the merged
-   `default.xex` here stops the title starting.
-2. **Leave the installed game itself installed.** It is what holds the licence, and
-   without it the dashboard refuses to launch. Aurora will list two Crash Course 2s —
-   start yours from the file browser, not the games blade.
-3. Copy **`output/Doritos Crash Course 2`** to the internal drive,
+1. **Remove the Title Update** — turn it off in Aurora's Title Update manager, or delete
+   it under `Hdd:\Content\0000000000000000\5841124F\`. Aurora applies an enabled update to
+   `default.xex` as it launches, and this exe has that update merged already; running the
+   `.xexp` over an image it was not written for is what stops the title starting.
+2. Copy **`output/Doritos Crash Course 2`** to the internal drive,
    `Hdd:\Games\Doritos Crash Course 2\`, and start it from Aurora.
+
+Whether the installed game stays installed is your call, and it is not what makes the
+title start. A licence is not in the exe and cannot be: it lives in the LIVE package's
+licence stub, which is why unlock tools rewrite packages rather than executables, while
+`default.xex`'s headers hold its entry point, imports, version and ratings and say nothing
+about who owns the game. What lets an extracted XBLA title boot unlicensed is a *licence
+patch*: DashLaunch's `xblapatch` and `licpatch`, both on in a standard install, or
+Aurora's per-game **Settings → License Patching**. What deleting the installed copy costs
+you is the licence and the retail files, which Live will not hand back now that this title
+is off the store — the package you put in `game-data/` is your only copy of those. Leave
+it installed and Aurora lists two Crash Course 2s: start the one under `Hdd:\Games\`, not
+the installed entry.
 
 First screen is the course list. You race as your own avatar.
 
@@ -118,7 +128,8 @@ with libmspack's LZX decompressor vendored — see its `NOTICE`).
 | | |
 |---|---|
 | `xexmerge is not there. — build it first: make` | You ran the script before building it. `make`, then run it again; `make doritos` does both. |
-| "The game could not start. Try downloading the game again later." | An installed Title Update that no longer matches the merged exe — delete it, keep the game. `./check_hashes.py` on your `default.xex` rules out the file itself. |
+| "The game could not start. Try downloading the game again later." | Three things say this. An enabled Title Update, applied over the merged exe again — remove it. Licence patching off, which any extracted XBLA title needs — DashLaunch's `xblapatch` and `licpatch`, or Aurora's per-game **License Patching**. Or a file the kernel will not load, which `./check_hashes.py` on your `default.xex` rules out. |
+| Aurora lists Crash Course 2 twice | The installed copy, which still wants Xbox Live. Yours is the one under `Hdd:\Games\`; rename it in Aurora if the two are hard to tell apart. |
 | "This game can't be started from this location" | The kernel is not patched. Patching the exe invalidates Microsoft's signature, so this needs an RGH/JTAG kernel. |
 | Black screen after the dash | `default.xex` and `data.pak` need the other 40 files beside them. |
 
