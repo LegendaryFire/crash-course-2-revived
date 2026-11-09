@@ -6,6 +6,10 @@ reaches a menu. This patches the game's own files so it starts and plays **offli
 a modded Xbox 360 — RGH or JTAG — launched from Aurora. No server, no proxy, no second
 console.
 
+All patches here are ported from
+[Doritos Crash Course 1 & 2 in Xenia](https://github.com/Lken-cmd/doritos-crash-course-xenia),
+the MIT-licensed mod that runs these games in the Xenia emulator.
+
 ## Run it
 
 Two commands. First build the one program here that needs compiling — a small XEX
@@ -62,12 +66,12 @@ title start. A licence is not in the exe and cannot be: it lives in the LIVE pac
 licence stub, which is why unlock tools rewrite packages rather than executables, while
 `default.xex`'s headers hold its entry point, imports, version and ratings and say nothing
 about who owns the game. What lets an extracted XBLA title boot unlicensed is a *licence
-patch*: DashLaunch's `xblapatch` and `licpatch`, both on in a standard install, or
-Aurora's per-game **Settings → License Patching**. What deleting the installed copy costs
-you is the licence and the retail files, which Live will not hand back now that this title
-is off the store — the package you put in `game-data/` is your only copy of those. Leave
-it installed and Aurora lists two Crash Course 2s: start the one under `Hdd:\Games\`, not
-the installed entry.
+patch*: DashLaunch's `xblapatch` and `licpatch` — the recommended setting, and the one on
+the console this build was tested on — or Aurora's per-game **Settings → License
+Patching**. What deleting the installed copy does cost is the licence and the retail files,
+which Live will not hand back now that this title is off the store: the package you put in
+`game-data/` is your only copy of those. Leave it installed and Aurora lists two Crash
+Course 2s — start the one under `Hdd:\Games\`, not the installed entry.
 
 First screen is the course list. You race as your own avatar.
 
@@ -139,7 +143,6 @@ Online play and marketplace content — that was the service, not the game. The 
 mod's stand-in avatar model is also left out, because a real console renders your own
 avatar.
 
-
 ## How this folder is put together
 
 `revive.py` merges, patches, rehashes and repacks; `xexpatch.py` is the XEX library
@@ -149,14 +152,7 @@ writes), and `tools/` reads 360 packages, paks and templates. The `Makefile` bui
 `xexmerge` out of `tools/xexmerge_src` and has a `doritos` and a `check` target for the
 two things you would otherwise type by hand.
 
-It is assembled from the Xenia mod's repository by that repo's
-`console/tools/make_bundle.py`, which is also what keeps the patch list here identical
-to the one the emulator build uses:
-
-```sh
-python3 ../doritos-crash-course-2/console/tools/make_bundle.py \
-    --name revive.py --no-readme .
-```
-
-Xenia-licensed and LGPL parts are credited in `tools/xexmerge_src/NOTICE`, alongside
-their sources; everything else here is MIT, see `LICENSE`.
+`patches/offline.patch.json` and `pakedits.py` are generated from the Xenia mod rather
+than copied by hand, so the addresses here cannot drift from the ones the emulator build
+uses. `tools/xexmerge_src/NOTICE` lists it and the other sources `xexmerge` stands on,
+with their licences; everything else is MIT, see `LICENSE`.

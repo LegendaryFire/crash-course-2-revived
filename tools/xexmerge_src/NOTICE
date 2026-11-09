@@ -27,8 +27,23 @@ that lets it build with no configure step.
 TinySHA1.hpp — header-only SHA-1, Copyright (c) 2012-22 Saurav Mohapatra, based on
 boost::uuid::details; permissive licence, notice in the file.
 
-Everything else in this repository — revive.py, xexpatch.py, pakpatch.py, pakedits.py,
-check_hashes.py, verify_build.py, patches/, tools/stfs.py, tools/tongaspak.py,
-tools/wbr.py, tools/lua51.py — is this project under MIT. Note that the patch addresses
-in patches/offline.patch.json describe Doritos Crash Course 2, which is EA's game: the
-licence covers these scripts, not the game, and this is meant for a copy you own.
+Everything else in this repository splits three ways.
+
+`patches/offline.patch.json` is generated from, and `tools/stfs.py`, `tools/tongaspak.py`,
+`tools/wbr.py`, `tools/lua51.py` are copies of, files from:
+
+  Doritos Crash Course 1 & 2 in Xenia
+  https://github.com/Lken-cmd/doritos-crash-course-xenia
+  Copyright (c) 2026 Doritos Crash Course Xenia mod contributors
+  MIT licence
+
+`pakedits.py` is generated from that repository's `tools/build_cc2.py` — only the seven
+template edits a console build needs, and its header records which copy.
+
+This project wrote the console-specific parts — `revive.py`, `xexpatch.py`, `pakpatch.py`,
+`check_hashes.py`, `verify_build.py`, both `Makefile`s, `xexmerge.cc` and `logstub.cc` —
+under MIT, see `../../LICENSE`.
+
+Note that the patch addresses in `patches/offline.patch.json` describe Doritos Crash
+Course 2, which is EA's game: the licences here cover these scripts, not the game, and
+this is meant for a copy you own.
