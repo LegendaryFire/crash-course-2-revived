@@ -1,0 +1,1434 @@
+{
+ "title_id": "5841124F",
+ "from": "patches/5841124F - Doritos Crash Course 2 (offline).patch.toml",
+ "console": [
+  "Accept a local profile instead of Xbox LIVE",
+  "Hide the Beta build label",
+  "Create the shop (course list) without LiveGamer",
+  "No 'service not available' kick",
+  "Keep the players in the race",
+  "Local multiplayer lobby without LiveGamer",
+  "World Tour adds the player",
+  "Save progress in the Xbox profile",
+  "Earn and spend stars offline"
+ ],
+ "optional": [
+  "Unlock all courses",
+  "Race solo (no AI racers)"
+ ],
+ "xenia_only": [
+  "Avatar previewer works with the stand-in model",
+  "Avatar asset refresh skips the stand-in model",
+  "Players race as the stand-in model",
+  "Stand-in model: no writes to avatar-only fields"
+ ],
+ "patch": [
+  {
+   "name": "Accept a local profile instead of Xbox LIVE",
+   "writes": [
+    {
+     "address": "82AF5BD0",
+     "bytes": "38c00001"
+    },
+    {
+     "address": "82AF8850",
+     "bytes": "38c00001"
+    },
+    {
+     "address": "82AF8858",
+     "bytes": "38c00001"
+    }
+   ]
+  },
+  {
+   "name": "Avatar previewer works with the stand-in model",
+   "writes": [
+    {
+     "address": "82B85C8C",
+     "bytes": "48000034"
+    },
+    {
+     "address": "82B8B370",
+     "bytes": "48000040"
+    }
+   ]
+  },
+  {
+   "name": "Hide the Beta build label",
+   "writes": [
+    {
+     "address": "82D9CA27",
+     "bytes": "00"
+    }
+   ]
+  },
+  {
+   "name": "Unlock all courses",
+   "writes": [
+    {
+     "address": "82BD10A0",
+     "bytes": "39600001"
+    },
+    {
+     "address": "82BD10C4",
+     "bytes": "38c00001"
+    },
+    {
+     "address": "82BD1004",
+     "bytes": "38c00001"
+    },
+    {
+     "address": "82B46F58",
+     "bytes": "39000000"
+    },
+    {
+     "address": "82AF3370",
+     "bytes": "9bca0130"
+    },
+    {
+     "address": "82AF3374",
+     "bytes": "9bca0134"
+    }
+   ]
+  },
+  {
+   "name": "Create the shop (course list) without LiveGamer",
+   "writes": [
+    {
+     "address": "82BD0F90",
+     "bytes": "4bf318e9"
+    },
+    {
+     "address": "82BD0F94",
+     "bytes": "48000064"
+    },
+    {
+     "address": "82B025B8",
+     "bytes": "60000000"
+    },
+    {
+     "address": "822DA320",
+     "bytes": "38600002"
+    },
+    {
+     "address": "822DA324",
+     "bytes": "4e800020"
+    },
+    {
+     "address": "822D9A10",
+     "bytes": "38600002"
+    },
+    {
+     "address": "822D9A14",
+     "bytes": "4e800020"
+    },
+    {
+     "address": "82B00BC8",
+     "bytes": "4e800020"
+    },
+    {
+     "address": "822DA9DC",
+     "bytes": "48000088"
+    },
+    {
+     "address": "822DA9BC",
+     "bytes": "60000000"
+    },
+    {
+     "address": "822DAA68",
+     "bytes": "60000000"
+    }
+   ]
+  },
+  {
+   "name": "Avatar asset refresh skips the stand-in model",
+   "writes": [
+    {
+     "address": "822DA328",
+     "bytes": "81630280"
+    },
+    {
+     "address": "822DA32C",
+     "bytes": "2b0b0000"
+    },
+    {
+     "address": "822DA330",
+     "bytes": "4d9a0020"
+    },
+    {
+     "address": "822DA334",
+     "bytes": "7d8802a6"
+    },
+    {
+     "address": "822DA338",
+     "bytes": "48712914"
+    },
+    {
+     "address": "822DA33C",
+     "bytes": "81630280"
+    },
+    {
+     "address": "822DA340",
+     "bytes": "2b0b0000"
+    },
+    {
+     "address": "822DA344",
+     "bytes": "4d9a0020"
+    },
+    {
+     "address": "822DA348",
+     "bytes": "81630024"
+    },
+    {
+     "address": "822DA34C",
+     "bytes": "48711480"
+    },
+    {
+     "address": "829ECC48",
+     "bytes": "4b8ece38"
+    },
+    {
+     "address": "829EB7C8",
+     "bytes": "4b8ee2e0"
+    },
+    {
+     "address": "822DA350",
+     "bytes": "2b030000"
+    },
+    {
+     "address": "822DA354",
+     "bytes": "4d9a0020"
+    },
+    {
+     "address": "822DA358",
+     "bytes": "7d8802a6"
+    },
+    {
+     "address": "822DA35C",
+     "bytes": "48819118"
+    },
+    {
+     "address": "82AF3470",
+     "bytes": "4b7e6ee0"
+    },
+    {
+     "address": "82B77D54",
+     "bytes": "2b1d0000"
+    },
+    {
+     "address": "82B77DC8",
+     "bytes": "2b1d0000"
+    },
+    {
+     "address": "82B77E3C",
+     "bytes": "2b1d0000"
+    },
+    {
+     "address": "822D9A80",
+     "bytes": "81630000"
+    },
+    {
+     "address": "822D9A84",
+     "bytes": "3d80821d"
+    },
+    {
+     "address": "822D9A88",
+     "bytes": "398ccf64"
+    },
+    {
+     "address": "822D9A8C",
+     "bytes": "7f0b6040"
+    },
+    {
+     "address": "822D9A90",
+     "bytes": "4c9a0020"
+    },
+    {
+     "address": "822D9A94",
+     "bytes": "81630280"
+    },
+    {
+     "address": "822D9A98",
+     "bytes": "2b0b0000"
+    },
+    {
+     "address": "822D9A9C",
+     "bytes": "4d9a0020"
+    },
+    {
+     "address": "822D9AA0",
+     "bytes": "7d8802a6"
+    },
+    {
+     "address": "822D9AA4",
+     "bytes": "487131a8"
+    },
+    {
+     "address": "822D9AA8",
+     "bytes": "81630000"
+    },
+    {
+     "address": "822D9AAC",
+     "bytes": "3d80821d"
+    },
+    {
+     "address": "822D9AB0",
+     "bytes": "398ccf64"
+    },
+    {
+     "address": "822D9AB4",
+     "bytes": "7f0b6040"
+    },
+    {
+     "address": "822D9AB8",
+     "bytes": "4c9a0020"
+    },
+    {
+     "address": "822D9ABC",
+     "bytes": "81630280"
+    },
+    {
+     "address": "822D9AC0",
+     "bytes": "2b0b0000"
+    },
+    {
+     "address": "822D9AC4",
+     "bytes": "4d9a0020"
+    },
+    {
+     "address": "822D9AC8",
+     "bytes": "81630024"
+    },
+    {
+     "address": "822D9ACC",
+     "bytes": "48711d00"
+    }
+   ]
+  },
+  {
+   "name": "No 'service not available' kick",
+   "writes": [
+    {
+     "address": "82244720",
+     "bytes": "480000e8"
+    },
+    {
+     "address": "82B12320",
+     "bytes": "48000090"
+    },
+    {
+     "address": "822656A0",
+     "bytes": "48000014"
+    }
+   ]
+  },
+  {
+   "name": "Keep the players in the race",
+   "writes": [
+    {
+     "address": "82B68228",
+     "bytes": "38600000"
+    },
+    {
+     "address": "82B6822C",
+     "bytes": "4e800020"
+    }
+   ]
+  },
+  {
+   "name": "Local multiplayer lobby without LiveGamer",
+   "writes": [
+    {
+     "address": "82BD1488",
+     "bytes": "38c00001"
+    }
+   ]
+  },
+  {
+   "name": "World Tour adds the player",
+   "writes": [
+    {
+     "address": "822DA360",
+     "bytes": "7d8802a6"
+    },
+    {
+     "address": "822DA364",
+     "bytes": "9181fff8"
+    },
+    {
+     "address": "822DA368",
+     "bytes": "9421ffa0"
+    },
+    {
+     "address": "822DA36C",
+     "bytes": "3d6082ee"
+    },
+    {
+     "address": "822DA370",
+     "bytes": "816baa48"
+    },
+    {
+     "address": "822DA374",
+     "bytes": "894b0009"
+    },
+    {
+     "address": "822DA378",
+     "bytes": "892b0049"
+    },
+    {
+     "address": "822DA37C",
+     "bytes": "7d4a4b78"
+    },
+    {
+     "address": "822DA380",
+     "bytes": "892b0089"
+    },
+    {
+     "address": "822DA384",
+     "bytes": "7d4a4b78"
+    },
+    {
+     "address": "822DA388",
+     "bytes": "892b00c9"
+    },
+    {
+     "address": "822DA38C",
+     "bytes": "7d4a4b78"
+    },
+    {
+     "address": "822DA390",
+     "bytes": "2b0a0000"
+    },
+    {
+     "address": "822DA394",
+     "bytes": "409a0014"
+    },
+    {
+     "address": "822DA398",
+     "bytes": "3d6082ea"
+    },
+    {
+     "address": "822DA39C",
+     "bytes": "816b93f4"
+    },
+    {
+     "address": "822DA3A0",
+     "bytes": "806b7260"
+    },
+    {
+     "address": "822DA3A4",
+     "bytes": "488a3b7d"
+    },
+    {
+     "address": "822DA3A8",
+     "bytes": "38210060"
+    },
+    {
+     "address": "822DA3AC",
+     "bytes": "8181fff8"
+    },
+    {
+     "address": "822DA3B0",
+     "bytes": "7d8803a6"
+    },
+    {
+     "address": "822DA3B4",
+     "bytes": "48891a2c"
+    },
+    {
+     "address": "822DB4F0",
+     "bytes": "4bffee71"
+    }
+   ]
+  },
+  {
+   "name": "Players race as the stand-in model",
+   "writes": [
+    {
+     "address": "822DA3B8",
+     "bytes": "424e4d44"
+    },
+    {
+     "address": "822DA3BC",
+     "bytes": "3a5f6176"
+    },
+    {
+     "address": "822DA3C0",
+     "bytes": "61746172"
+    },
+    {
+     "address": "822DA3C4",
+     "bytes": "2f64756d"
+    },
+    {
+     "address": "822DA3C8",
+     "bytes": "6d796d6f"
+    },
+    {
+     "address": "822DA3CC",
+     "bytes": "64656c2e"
+    },
+    {
+     "address": "822DA3D0",
+     "bytes": "63666700"
+    },
+    {
+     "address": "822DA3D4",
+     "bytes": "424e4d44"
+    },
+    {
+     "address": "822DA3D8",
+     "bytes": "3a5f6176"
+    },
+    {
+     "address": "822DA3DC",
+     "bytes": "61746172"
+    },
+    {
+     "address": "822DA3E0",
+     "bytes": "2f706c61"
+    },
+    {
+     "address": "822DA3E4",
+     "bytes": "79657225"
+    },
+    {
+     "address": "822DA3E8",
+     "bytes": "642e6366"
+    },
+    {
+     "address": "822DA3EC",
+     "bytes": "67000000"
+    },
+    {
+     "address": "82B7DF84",
+     "bytes": "3d60822e"
+    },
+    {
+     "address": "82B7DF8C",
+     "bytes": "7fe5fb78"
+    },
+    {
+     "address": "82B7DF90",
+     "bytes": "388ba3d4"
+    },
+    {
+     "address": "82B7DF9C",
+     "bytes": "38810060"
+    },
+    {
+     "address": "82B7DFA0",
+     "bytes": "60000000"
+    },
+    {
+     "address": "82B7DFA4",
+     "bytes": "60000000"
+    },
+    {
+     "address": "82B7DFA8",
+     "bytes": "60000000"
+    },
+    {
+     "address": "82B7DFAC",
+     "bytes": "60000000"
+    },
+    {
+     "address": "82B7DFB4",
+     "bytes": "60000000"
+    },
+    {
+     "address": "82B7DFC0",
+     "bytes": "80e800a4"
+    },
+    {
+     "address": "82B7D588",
+     "bytes": "4b75c548"
+    },
+    {
+     "address": "8216FEDC",
+     "bytes": "424e4d44"
+    },
+    {
+     "address": "8218B5A4",
+     "bytes": "424e4d44"
+    },
+    {
+     "address": "822D9DD8",
+     "bytes": "3c80822e"
+    },
+    {
+     "address": "822D9DDC",
+     "bytes": "3884a3b8"
+    },
+    {
+     "address": "822D9DE0",
+     "bytes": "2b050000"
+    },
+    {
+     "address": "822D9DE4",
+     "bytes": "419a0040"
+    },
+    {
+     "address": "822D9DE8",
+     "bytes": "89850000"
+    },
+    {
+     "address": "822D9DEC",
+     "bytes": "2b0c0061"
+    },
+    {
+     "address": "822D9DF0",
+     "bytes": "409a0034"
+    },
+    {
+     "address": "822D9DF4",
+     "bytes": "89850001"
+    },
+    {
+     "address": "822D9DF8",
+     "bytes": "2b0c0069"
+    },
+    {
+     "address": "822D9DFC",
+     "bytes": "409a0028"
+    },
+    {
+     "address": "822D9E00",
+     "bytes": "89850002"
+    },
+    {
+     "address": "822D9E04",
+     "bytes": "2b0c002f"
+    },
+    {
+     "address": "822D9E08",
+     "bytes": "409a001c"
+    },
+    {
+     "address": "822D9E0C",
+     "bytes": "89850003"
+    },
+    {
+     "address": "822D9E10",
+     "bytes": "2b0c0000"
+    },
+    {
+     "address": "822D9E14",
+     "bytes": "419a0010"
+    },
+    {
+     "address": "822D9E18",
+     "bytes": "38a50003"
+    },
+    {
+     "address": "822D9E1C",
+     "bytes": "3c80822e"
+    },
+    {
+     "address": "822D9E20",
+     "bytes": "38849e28"
+    },
+    {
+     "address": "822D9E24",
+     "bytes": "4e800020"
+    },
+    {
+     "address": "822D9E28",
+     "bytes": "424e4d44"
+    },
+    {
+     "address": "822D9E2C",
+     "bytes": "3a5f6176"
+    },
+    {
+     "address": "822D9E30",
+     "bytes": "61746172"
+    },
+    {
+     "address": "822D9E34",
+     "bytes": "2f61695f"
+    },
+    {
+     "address": "822D9E38",
+     "bytes": "25732e63"
+    },
+    {
+     "address": "822D9E3C",
+     "bytes": "66670000"
+    },
+    {
+     "address": "82AE507C",
+     "bytes": "4b7f4d5d"
+    },
+    {
+     "address": "82AE5084",
+     "bytes": "60000000"
+    },
+    {
+     "address": "82B722B4",
+     "bytes": "7d655b78"
+    },
+    {
+     "address": "82B722B8",
+     "bytes": "4b767b21"
+    },
+    {
+     "address": "82B7235C",
+     "bytes": "4b7677a8"
+    },
+    {
+     "address": "822DA414",
+     "bytes": "81630120"
+    },
+    {
+     "address": "822DA418",
+     "bytes": "2b0b0000"
+    },
+    {
+     "address": "822DA41C",
+     "bytes": "419a000c"
+    },
+    {
+     "address": "822DA420",
+     "bytes": "3f0082ee"
+    },
+    {
+     "address": "822DA424",
+     "bytes": "48714a44"
+    },
+    {
+     "address": "822DA428",
+     "bytes": "48714df4"
+    },
+    {
+     "address": "829EEE60",
+     "bytes": "4b8eb5b4"
+    },
+    {
+     "address": "822D9AD0",
+     "bytes": "2b0a0000"
+    },
+    {
+     "address": "822D9AD4",
+     "bytes": "419a0070"
+    },
+    {
+     "address": "822D9AD8",
+     "bytes": "812a0000"
+    },
+    {
+     "address": "822D9ADC",
+     "bytes": "3ca0821d"
+    },
+    {
+     "address": "822D9AE0",
+     "bytes": "38a5cf64"
+    },
+    {
+     "address": "822D9AE4",
+     "bytes": "7f092840"
+    },
+    {
+     "address": "822D9AE8",
+     "bytes": "409a005c"
+    },
+    {
+     "address": "822D9AEC",
+     "bytes": "812a0228"
+    },
+    {
+     "address": "822D9AF0",
+     "bytes": "2b090000"
+    },
+    {
+     "address": "822D9AF4",
+     "bytes": "419a0050"
+    },
+    {
+     "address": "822D9AF8",
+     "bytes": "80a90008"
+    },
+    {
+     "address": "822D9AFC",
+     "bytes": "488a3a94"
+    },
+    {
+     "address": "822D9B00",
+     "bytes": "60000000"
+    },
+    {
+     "address": "822D9B04",
+     "bytes": "3ca0822e"
+    },
+    {
+     "address": "822D9B08",
+     "bytes": "38a59b58"
+    },
+    {
+     "address": "822D9B0C",
+     "bytes": "2b030000"
+    },
+    {
+     "address": "822D9B10",
+     "bytes": "419a0028"
+    },
+    {
+     "address": "822D9B14",
+     "bytes": "81030000"
+    },
+    {
+     "address": "822D9B18",
+     "bytes": "81080154"
+    },
+    {
+     "address": "822D9B1C",
+     "bytes": "6d0882a8"
+    },
+    {
+     "address": "822D9B20",
+     "bytes": "2b08cc28"
+    },
+    {
+     "address": "822D9B24",
+     "bytes": "409a0014"
+    },
+    {
+     "address": "822D9B28",
+     "bytes": "81030228"
+    },
+    {
+     "address": "822D9B2C",
+     "bytes": "2b080000"
+    },
+    {
+     "address": "822D9B30",
+     "bytes": "419a0008"
+    },
+    {
+     "address": "822D9B34",
+     "bytes": "80a80008"
+    },
+    {
+     "address": "822D9B38",
+     "bytes": "7d234b78"
+    },
+    {
+     "address": "822D9B3C",
+     "bytes": "80c90008"
+    },
+    {
+     "address": "822D9B40",
+     "bytes": "4889882c"
+    },
+    {
+     "address": "822D9B44",
+     "bytes": "3ca0822e"
+    },
+    {
+     "address": "822D9B48",
+     "bytes": "38a59b58"
+    },
+    {
+     "address": "822D9B4C",
+     "bytes": "488a3a44"
+    },
+    {
+     "address": "822D9B58",
+     "bytes": "00000000"
+    },
+    {
+     "address": "822D9B5C",
+     "bytes": "00000000"
+    },
+    {
+     "address": "822D9B60",
+     "bytes": "822d9b68"
+    },
+    {
+     "address": "822D9B64",
+     "bytes": "00000000"
+    },
+    {
+     "address": "822D9B68",
+     "bytes": "822d9b68"
+    },
+    {
+     "address": "822D9B6C",
+     "bytes": "822d9b68"
+    },
+    {
+     "address": "822D9B70",
+     "bytes": "822d9b68"
+    },
+    {
+     "address": "822D9B74",
+     "bytes": "00000000"
+    },
+    {
+     "address": "822DA42C",
+     "bytes": "2c0bffff"
+    },
+    {
+     "address": "822DA430",
+     "bytes": "41820024"
+    },
+    {
+     "address": "822DA434",
+     "bytes": "2c0affff"
+    },
+    {
+     "address": "822DA438",
+     "bytes": "4182001c"
+    },
+    {
+     "address": "822DA43C",
+     "bytes": "280b0000"
+    },
+    {
+     "address": "822DA440",
+     "bytes": "41820014"
+    },
+    {
+     "address": "822DA444",
+     "bytes": "280a0000"
+    },
+    {
+     "address": "822DA448",
+     "bytes": "4182000c"
+    },
+    {
+     "address": "822DA44C",
+     "bytes": "388b0048"
+    },
+    {
+     "address": "822DA450",
+     "bytes": "487ae524"
+    },
+    {
+     "address": "822DA454",
+     "bytes": "487ae528"
+    },
+    {
+     "address": "82A88970",
+     "bytes": "4b851abc"
+    }
+   ]
+  },
+  {
+   "name": "Race solo (no AI racers)",
+   "writes": [
+    {
+     "address": "82B6D93C",
+     "bytes": "39400000"
+    },
+    {
+     "address": "82B6D9DC",
+     "bytes": "39600000"
+    },
+    {
+     "address": "82B6DA08",
+     "bytes": "38a00000"
+    }
+   ]
+  },
+  {
+   "name": "Save progress in the Xbox profile",
+   "writes": [
+    {
+     "address": "822D9B78",
+     "bytes": "387e0000"
+    },
+    {
+     "address": "822D9B7C",
+     "bytes": "389e0640"
+    },
+    {
+     "address": "822D9B80",
+     "bytes": "487dbe80"
+    },
+    {
+     "address": "82AF2024",
+     "bytes": "4b7e7b55"
+    },
+    {
+     "address": "822D9B84",
+     "bytes": "897f11ca"
+    },
+    {
+     "address": "822D9B88",
+     "bytes": "2b0b0000"
+    },
+    {
+     "address": "822D9B8C",
+     "bytes": "4d9a0020"
+    },
+    {
+     "address": "822D9B90",
+     "bytes": "817f1638"
+    },
+    {
+     "address": "822D9B94",
+     "bytes": "917f10d8"
+    },
+    {
+     "address": "822D9B98",
+     "bytes": "817f163c"
+    },
+    {
+     "address": "822D9B9C",
+     "bytes": "917f10dc"
+    },
+    {
+     "address": "822D9BA0",
+     "bytes": "817f1644"
+    },
+    {
+     "address": "822D9BA4",
+     "bytes": "917f10e0"
+    },
+    {
+     "address": "822D9BA8",
+     "bytes": "3d2082b4"
+    },
+    {
+     "address": "822D9BAC",
+     "bytes": "81296f58"
+    },
+    {
+     "address": "822D9BB0",
+     "bytes": "3d403900"
+    },
+    {
+     "address": "822D9BB4",
+     "bytes": "7f095040"
+    },
+    {
+     "address": "822D9BB8",
+     "bytes": "419a0064"
+    },
+    {
+     "address": "822D9BBC",
+     "bytes": "80bf044c"
+    },
+    {
+     "address": "822D9BC0",
+     "bytes": "3cc082ea"
+    },
+    {
+     "address": "822D9BC4",
+     "bytes": "80c68b28"
+    },
+    {
+     "address": "822D9BC8",
+     "bytes": "80c6000c"
+    },
+    {
+     "address": "822D9BCC",
+     "bytes": "38e00000"
+    },
+    {
+     "address": "822D9BD0",
+     "bytes": "39000000"
+    },
+    {
+     "address": "822D9BD4",
+     "bytes": "2b060000"
+    },
+    {
+     "address": "822D9BD8",
+     "bytes": "419a003c"
+    },
+    {
+     "address": "822D9BDC",
+     "bytes": "812600c8"
+    },
+    {
+     "address": "822D9BE0",
+     "bytes": "7d462a14"
+    },
+    {
+     "address": "822D9BE4",
+     "bytes": "39800001"
+    },
+    {
+     "address": "822D9BE8",
+     "bytes": "7d8c4830"
+    },
+    {
+     "address": "822D9BEC",
+     "bytes": "896a0130"
+    },
+    {
+     "address": "822D9BF0",
+     "bytes": "2b0b0000"
+    },
+    {
+     "address": "822D9BF4",
+     "bytes": "409a0008"
+    },
+    {
+     "address": "822D9BF8",
+     "bytes": "7ce76378"
+    },
+    {
+     "address": "822D9BFC",
+     "bytes": "896a0134"
+    },
+    {
+     "address": "822D9C00",
+     "bytes": "2b0b0000"
+    },
+    {
+     "address": "822D9C04",
+     "bytes": "409a0008"
+    },
+    {
+     "address": "822D9C08",
+     "bytes": "7d086378"
+    },
+    {
+     "address": "822D9C0C",
+     "bytes": "80c60028"
+    },
+    {
+     "address": "822D9C10",
+     "bytes": "4bffffc4"
+    },
+    {
+     "address": "822D9C14",
+     "bytes": "90ff10e4"
+    },
+    {
+     "address": "822D9C18",
+     "bytes": "911f10e8"
+    },
+    {
+     "address": "822D9C1C",
+     "bytes": "487dc28c"
+    },
+    {
+     "address": "82AF043C",
+     "bytes": "4b7e9749"
+    },
+    {
+     "address": "822D9C20",
+     "bytes": "817e0c90"
+    },
+    {
+     "address": "822D9C24",
+     "bytes": "917e11f0"
+    },
+    {
+     "address": "822D9C28",
+     "bytes": "817e0c94"
+    },
+    {
+     "address": "822D9C2C",
+     "bytes": "917e11f4"
+    },
+    {
+     "address": "822D9C30",
+     "bytes": "817e0c98"
+    },
+    {
+     "address": "822D9C34",
+     "bytes": "917e11fc"
+    },
+    {
+     "address": "822D9C38",
+     "bytes": "80be0004"
+    },
+    {
+     "address": "822D9C3C",
+     "bytes": "80fe0c9c"
+    },
+    {
+     "address": "822D9C40",
+     "bytes": "60e70001"
+    },
+    {
+     "address": "822D9C44",
+     "bytes": "811e0ca0"
+    },
+    {
+     "address": "822D9C48",
+     "bytes": "3cc082ea"
+    },
+    {
+     "address": "822D9C4C",
+     "bytes": "80c68b28"
+    },
+    {
+     "address": "822D9C50",
+     "bytes": "80c6000c"
+    },
+    {
+     "address": "822D9C54",
+     "bytes": "38000000"
+    },
+    {
+     "address": "822D9C58",
+     "bytes": "2b060000"
+    },
+    {
+     "address": "822D9C5C",
+     "bytes": "419a0034"
+    },
+    {
+     "address": "822D9C60",
+     "bytes": "812600c8"
+    },
+    {
+     "address": "822D9C64",
+     "bytes": "7d462a14"
+    },
+    {
+     "address": "822D9C68",
+     "bytes": "7ceb4c30"
+    },
+    {
+     "address": "822D9C6C",
+     "bytes": "716b0001"
+    },
+    {
+     "address": "822D9C70",
+     "bytes": "41820008"
+    },
+    {
+     "address": "822D9C74",
+     "bytes": "980a0130"
+    },
+    {
+     "address": "822D9C78",
+     "bytes": "7d0b4c30"
+    },
+    {
+     "address": "822D9C7C",
+     "bytes": "716b0001"
+    },
+    {
+     "address": "822D9C80",
+     "bytes": "41820008"
+    },
+    {
+     "address": "822D9C84",
+     "bytes": "980a0134"
+    },
+    {
+     "address": "822D9C88",
+     "bytes": "80c60028"
+    },
+    {
+     "address": "822D9C8C",
+     "bytes": "4bffffcc"
+    },
+    {
+     "address": "822D9C90",
+     "bytes": "3d6082ea"
+    },
+    {
+     "address": "822D9C94",
+     "bytes": "4e800020"
+    },
+    {
+     "address": "82AF2D94",
+     "bytes": "4b7e6e8d"
+    }
+   ]
+  },
+  {
+   "name": "Earn and spend stars offline",
+   "writes": [
+    {
+     "address": "822D9C98",
+     "bytes": "9b3c0710"
+    },
+    {
+     "address": "822D9C9C",
+     "bytes": "2f070000"
+    },
+    {
+     "address": "822D9CA0",
+     "bytes": "4c990020"
+    },
+    {
+     "address": "822D9CA4",
+     "bytes": "817b00ac"
+    },
+    {
+     "address": "822D9CA8",
+     "bytes": "2b0b0000"
+    },
+    {
+     "address": "822D9CAC",
+     "bytes": "4d9a0020"
+    },
+    {
+     "address": "822D9CB0",
+     "bytes": "814b1638"
+    },
+    {
+     "address": "822D9CB4",
+     "bytes": "7d4a3a14"
+    },
+    {
+     "address": "822D9CB8",
+     "bytes": "914b1638"
+    },
+    {
+     "address": "822D9CBC",
+     "bytes": "814b163c"
+    },
+    {
+     "address": "822D9CC0",
+     "bytes": "7d4a3a14"
+    },
+    {
+     "address": "822D9CC4",
+     "bytes": "914b163c"
+    },
+    {
+     "address": "822D9CC8",
+     "bytes": "39400001"
+    },
+    {
+     "address": "822D9CCC",
+     "bytes": "994b11d0"
+    },
+    {
+     "address": "822D9CD0",
+     "bytes": "4e800020"
+    },
+    {
+     "address": "82B7D178",
+     "bytes": "4b75cb21"
+    },
+    {
+     "address": "82B713EC",
+     "bytes": "48000020"
+    },
+    {
+     "address": "82AF0C04",
+     "bytes": "60000000"
+    },
+    {
+     "address": "82B018D4",
+     "bytes": "60000000"
+    },
+    {
+     "address": "822D9CD4",
+     "bytes": "807f0008"
+    },
+    {
+     "address": "822D9CD8",
+     "bytes": "488189e0"
+    },
+    {
+     "address": "822E5FAC",
+     "bytes": "4bff3d29"
+    },
+    {
+     "address": "822E5EF8",
+     "bytes": "4bff3ddd"
+    },
+    {
+     "address": "82B012E0",
+     "bytes": "60000000"
+    },
+    {
+     "address": "822DB62C",
+     "bytes": "4bffe6a9"
+    }
+   ]
+  },
+  {
+   "name": "Stand-in model: no writes to avatar-only fields",
+   "writes": [
+    {
+     "address": "822D9CE0",
+     "bytes": "81830000"
+    },
+    {
+     "address": "822D9CE4",
+     "bytes": "3c00821b"
+    },
+    {
+     "address": "822D9CE8",
+     "bytes": "60004d24"
+    },
+    {
+     "address": "822D9CEC",
+     "bytes": "7f0c0040"
+    },
+    {
+     "address": "822D9CF0",
+     "bytes": "4d9a0020"
+    },
+    {
+     "address": "822D9CF4",
+     "bytes": "916302c0"
+    },
+    {
+     "address": "822D9CF8",
+     "bytes": "4e800020"
+    },
+    {
+     "address": "822D9CFC",
+     "bytes": "81830000"
+    },
+    {
+     "address": "822D9D00",
+     "bytes": "3c00821b"
+    },
+    {
+     "address": "822D9D04",
+     "bytes": "60004d24"
+    },
+    {
+     "address": "822D9D08",
+     "bytes": "7f0c0040"
+    },
+    {
+     "address": "822D9D0C",
+     "bytes": "4d9a0020"
+    },
+    {
+     "address": "822D9D10",
+     "bytes": "908302c0"
+    },
+    {
+     "address": "822D9D14",
+     "bytes": "4e800020"
+    },
+    {
+     "address": "829F0B74",
+     "bytes": "4b8e916d"
+    },
+    {
+     "address": "82AFF7EC",
+     "bytes": "4b7da4f5"
+    },
+    {
+     "address": "82B6ED24",
+     "bytes": "4b76afbd"
+    },
+    {
+     "address": "82B77910",
+     "bytes": "4b7623d1"
+    },
+    {
+     "address": "82BBE7B8",
+     "bytes": "4b71b529"
+    },
+    {
+     "address": "82BCC128",
+     "bytes": "4b70dbb9"
+    },
+    {
+     "address": "829ECE20",
+     "bytes": "4b8ecedd"
+    }
+   ]
+  }
+ ]
+}

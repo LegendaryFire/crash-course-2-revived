@@ -1,0 +1,5 @@
+# the game this writes, and python's droppings
+Doritos Crash Course 2/
+out/
+__pycache__/
+*.pyc

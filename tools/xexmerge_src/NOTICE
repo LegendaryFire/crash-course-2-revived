@@ -1,0 +1,34 @@
+Third-party code in this folder
+===============================
+
+xexmerge.cc, logstub.cc, Makefile — this project, MIT (see ../../LICENSE).
+
+xexmerge.cc is a standalone program whose algorithm is a port of Xenia's XEX loader:
+`src/xenia/cpu/xex_module.cc` (`ReadImage`, `ApplyPatch`), `src/xenia/cpu/lzx.cc` and
+the structure definitions in `src/xenia/kernel/util/xex2_info.h`.
+
+  Xenia — Xbox 360 Emulator Research Project
+  Copyright Ben Vanik and Xenia contributors
+  BSD 3-Clause licence: https://github.com/xenia-project/xenia/blob/master/LICENSE
+
+mspack/ — the LZX decompressor and AES implementation, as Xenia vendors them in
+`lib/mspack`. Headers here are byte-identical to that copy, including the `config.h`
+that lets it build with no configure step.
+
+  lzxd.c, lzx.h, mspack.h, readbits.h, readhuff.h, system.c, system.h, config.h
+  libmspack — Copyright Stuart Caie and contributors
+  GNU Lesser General Public Licence 2.1; the text is in mspack/COPYING.LIB, and the
+  sources are here in full, so you can modify them and rebuild (`make -C ..`).
+
+  rijndael-alg-fst.c, rijndael-alg-fst.h
+  Optimised ANSI C Rijndael, version 3.0, by Vincent Rijmen and Paulo Barreto — see
+  the notice at the top of the file.
+
+TinySHA1.hpp — header-only SHA-1, Copyright (c) 2012-22 Saurav Mohapatra, based on
+boost::uuid::details; permissive licence, notice in the file.
+
+Everything else in this repository — revive.py, xexpatch.py, pakpatch.py, pakedits.py,
+check_hashes.py, verify_build.py, patches/, tools/stfs.py, tools/tongaspak.py,
+tools/wbr.py, tools/lua51.py — is this project under MIT. Note that the patch addresses
+in patches/offline.patch.json describe Doritos Crash Course 2, which is EA's game: the
+licence covers these scripts, not the game, and this is meant for a copy you own.
